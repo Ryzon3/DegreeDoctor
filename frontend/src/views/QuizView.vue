@@ -1,5 +1,6 @@
 <script>
 import { useStore } from "../stores/store";
+import { parseTranscript} from "../utils/parseTranscript";
 
 export default {
     data() {
@@ -192,7 +193,7 @@ export default {
             reader.onload = function(){
                 console.log(reader.result);
             }
-
+            parseTranscript(reader.result);
         },
     },
 };
