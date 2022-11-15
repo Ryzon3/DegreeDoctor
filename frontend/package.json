@@ -11,6 +11,7 @@
     "dependencies": {
         "@quasar/extras": "^1.15.3",
         "@vueuse/core": "^9.3.0",
+        "jssoup": "^0.0.15",
         "pinia": "^2.0.21",
         "quasar": "^2.8.4",
         "vue": "^3.2.38",

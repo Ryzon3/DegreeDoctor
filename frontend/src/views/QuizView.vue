@@ -187,13 +187,12 @@ export default {
             this.$router.push("/degree");
         },
         processTranscript(data){
-            // const transcript = data.files[0];
-            console.log(data);
-            var reader = new FileReader(data);
+            var reader = new FileReader();
             reader.readAsText(data);
             reader.onload = function(){
                 console.log(reader.result);
             }
+
         },
     },
 };
