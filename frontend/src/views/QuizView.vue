@@ -187,8 +187,8 @@ export default {
             this.$router.push("/degree");
         },
         processTranscript(data){
-            const transcript = data.files[0];
-            console.log(transcript);
+            // const transcript = data.files[0];
+            console.log(data);
         },
     },
 };
@@ -196,7 +196,7 @@ export default {
 
 <template>
     <div class="q-gutter-y-md column" style="max-width: 300px">
-        <q-file color="teal" filled v-model="model" label="Label" @submit="processTranscript">
+        <q-file color="teal" filled v-model="model" label="Label" @update:model-value="processTranscript">
         <template v-slot:prepend>
           <q-icon name="file_upload" />
         </template>
