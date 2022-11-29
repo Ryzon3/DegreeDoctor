@@ -1,6 +1,6 @@
 <script>
 import { useStore } from "../stores/store";
-import { parseTranscript} from "../utils/parseTranscript";
+import { parseTranscript } from "../utils/parseTranscript";
 
 export default {
     data() {
@@ -187,13 +187,12 @@ export default {
             console.log(degree);
             this.$router.push("/degree");
         },
-        processTranscript(data){
+        processTranscript(data) {
             var reader = new FileReader();
             reader.readAsText(data);
-            reader.onload = function(){
-                console.log(reader.result);
+            reader.onload = function () {
+                parseTranscript(reader.result);
             }
-            parseTranscript(reader.result);
         },
     },
 };
@@ -202,73 +201,30 @@ export default {
 <template>
     <div class="q-gutter-y-md column" style="max-width: 300px">
         <q-file color="teal" filled v-model="model" label="Label" @update:model-value="processTranscript">
-        <template v-slot:prepend>
-          <q-icon name="file_upload" />
-        </template>
-      </q-file>
+            <template v-slot:prepend>
+                <q-icon name="file_upload" />
+            </template>
+        </q-file>
     </div>
 
-    <q-form
-        class="full-width column wrap justify-center items-center content-center"
-    >
+    <q-form class="full-width column wrap justify-center items-center content-center">
         <p>Enter Your Plan Name:</p>
-        <q-input
-            v-model="degreeName"
-            standout="bg-teal text-white"
-            label="My Course Plan"
-        />
+        <q-input v-model="degreeName" standout="bg-teal text-white" label="My Course Plan" />
         <p>Select Your Major(s):</p>
-        <q-select
-            v-model="selectedMajors"
-            standout="bg-teal text-white"
-            filled
-            use-input
-            use-chips
-            multiple
-            input-debounce="0"
-            :options="filteredMajors"
-            style="width: 250px"
-            @new-value="addMajor"
-            @input-value="filterMajor"
-        />
+        <q-select v-model="selectedMajors" standout="bg-teal text-white" filled use-input use-chips multiple
+            input-debounce="0" :options="filteredMajors" style="width: 250px" @new-value="addMajor"
+            @input-value="filterMajor" />
         <p>Select Your Minor(s):</p>
-        <q-select
-            v-model="selectedMinors"
-            standout="bg-teal text-white"
-            filled
-            use-input
-            use-chips
-            multiple
-            input-debounce="0"
-            :options="filteredMinors"
-            style="width: 250px"
-            @new-value="addMinor"
-            @input-value="filterMinor"
-        />
+        <q-select v-model="selectedMinors" standout="bg-teal text-white" filled use-input use-chips multiple
+            input-debounce="0" :options="filteredMinors" style="width: 250px" @new-value="addMinor"
+            @input-value="filterMinor" />
         <p>Select Your Pathway(s):</p>
-        <q-select
-            v-model="selectedPathways"
-            standout="bg-teal text-white"
-            filled
-            use-input
-            input-debounce="0"
-            :options="filteredPathways"
-            style="width: 250px"
-            @new-value="addPathway"
-            @input-value="filterPathway"
-        />
+        <q-select v-model="selectedPathways" standout="bg-teal text-white" filled use-input input-debounce="0"
+            :options="filteredPathways" style="width: 250px" @new-value="addPathway" @input-value="filterPathway" />
         <p>Select Your Concentration(s):</p>
-        <q-select
-            v-model="selectedConcentrations"
-            standout="bg-teal text-white"
-            filled
-            use-input
-            input-debounce="0"
-            :options="filteredConcentrations"
-            style="width: 250px; padding-bottom: 20px"
-            @new-value="addConcentration"
-            @input-value="filterConcentration"
-        />
+        <q-select v-model="selectedConcentrations" standout="bg-teal text-white" filled use-input input-debounce="0"
+            :options="filteredConcentrations" style="width: 250px; padding-bottom: 20px" @new-value="addConcentration"
+            @input-value="filterConcentration" />
         <div>
             <q-btn label="Submit" color="primary" @click="submit" />
         </div>

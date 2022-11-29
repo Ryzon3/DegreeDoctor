@@ -1,6 +1,8 @@
-// var JSSoup = require('jssoup').default;
 
 export function parseTranscript(transcript) {
-  const soup = new JSSoup(transcript);
-  const paragraphs = soup.findAll('p');
+  var arrayOfData = transcript.split("STUDENT INFORMATION");
+  arrayOfData =  arrayOfData[1];
+  arrayOfData = arrayOfData.split("Unofficial Transcript");
+  arrayOfData.pop();
+  console.log(arrayOfData);
 };
