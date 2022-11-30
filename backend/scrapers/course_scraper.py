@@ -7,7 +7,7 @@ from lxml import html
 from tqdm import tqdm
 import json
 import unicodedata
-from degree_util import subjs, filepath, get_catalogs, root
+from degree_util import subjs, root, get_catalogs, clean_str, norm_str, trim_space
 
 # The api key is public so it does not need to be hidden in a .env file
 BASE_URL = "http://rpi.apis.acalog.com/v1/"
@@ -24,10 +24,6 @@ def get_course_ids(catalog_id: str) -> List[str]:
     )
     return courses_xml.xpath("//id/text()")
 
-# returns only alphanumeric characters in string
-def clean_list(s: str) -> str:
-    return "".join([x for x in s if x.isalnum() or x.isspace()])
-
 # Finds and returns a cleaned up description of the course
 def get_catalog_description(fields, course_name):
     found_name = False
@@ -42,7 +38,7 @@ def get_catalog_description(fields, course_name):
             description = field.xpath(".//*/text()")
             if description:
                 clean_description = " ".join(" ".join(description).split())
-                clean_description = clean_list(clean_description)
+                clean_description = clean_str(clean_description)
                 # Short descriptions are usually false positives
                 if clean_description.startswith("Prerequisite"):
                     return ""
@@ -75,7 +71,7 @@ def split_req(str):
 # uses unicodedata to normalize str and then splits pre-requirements into
 # 'required' and 'one_of'
 def get_prereq(str): 
-    str = unicodedata.normalize("NFKD",str)
+    str = norm_str(str)
     reqs = []
     one_of = []
     reqset = split_req(str)
@@ -153,11 +149,11 @@ def get_course_data(course_ids: List[str], catalog_id) -> Dict:
             ID = course.xpath("./content/code/text()")[0].strip()
             if ID[0] == '6' or ID[0] == '9':
                 continue
-            course_name = clean_list(course.xpath("./content/name/text()")[0].strip())
+            course_name = clean_str(trim_space(norm_str(course.xpath("./content/name/text()")[0].strip())))
             fields = course.xpath("./content/field")
             year = ""
             semesters = []
-            cross_listed = []
+            cross_listed = {}
             prereqs = []
             credit = []
             professors = []
@@ -172,10 +168,10 @@ def get_course_data(course_ids: List[str], catalog_id) -> Dict:
                         credit = get_credit(field_text)
                     elif field.get('type')[-3:] == str(base - 8):
                         if len(field_text) > 0:
-                            cross_listed = courses_from_string(field.text_content().upper())
-                            for item in cross_listed:
-                                if item.find(subj + '-' + str(ID)) != -1:
-                                    cross_listed.remove(item)
+                            crs = courses_from_string(field.text_content().upper())
+                            for item in crs:
+                                if item.find(subj + '-' + str(ID)) == -1:
+                                    cross_listed[subj] = str(ID)
                     elif field.get('type')[-3:] == str(base - 11):
                         if "fall" in field_text.lower():
                             semesters.append("fall")
@@ -229,7 +225,7 @@ def scrape_courses():
         data = get_course_data(course_ids, catalog_id)
         courses_per_year.update(data)
     # Serializing json
-    json_object = json.dumps(courses_per_year, indent=4)
+    json_object = json.dumps(courses_per_year,sort_keys=True, indent=2, ensure_ascii=False)
  
     # Writing to sample.json
     with open(root + "/frontend/src/data/courses.json", "w") as outfile:

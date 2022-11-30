@@ -1,0 +1,53 @@
+----CHANGELOG V1.1----
+This is an active archival of the current state of credit requirements.
+Major issues:
+ - Electives being non uniform.
+ - Courses not being split correctly.
+ - extra objects/subdivisions messing up parsing logic.
+
+** CURRENTLY WILL ADD BOTH REQUIREMENTS WHERE IT ASKS TO PICK ONE OF MULTIPLE
+WILL NEED TO FIGURE OUT BETTER IMPLEMENTATION LATER TO AVIOD DOUBLE COUNTING**
+
+Progress: 14/40
+[**************-------------------------]
+
+Aeronautical Engineering Curriculum                         |130/130| correct
+Applied Physics                                             |125/125| correct
+Architecture                                               *|142/171| 5th year classes, also misparsing somewhere (annoying edge case do later)
+Biological Neuroscience                                     |128/128| correct
+Biology                                                    *|112/128| like Bio Neuro, but has sub item tracks for arch to parse through
+Biomedical Engineering                                      |128/128| correct
+Biotechnology and Health Economics                          |124/124| correct
+Building Sciences B.S.                                     @|138/130| bad sentence parsing AAAHHHH 3-Fall or Spring (goes over credits b/c of this)
+Business Analytics                                         *| 82/124| bad case of parsing, bad seperation of classes with "or"
+Business and Management                                    *|108/124| same as Bsan probably and weird fall or spring sem parsing
+Chemical Engineering                                       ~|135/131| double counts classes for choices but otherwise perfect :D
+Chemistry                                                   |128/128| correct
+Chemistry - Chemical Biology Track                         @|127/128| correctly parses but catalog forgot to add intro to cell bio lab so :DDDD
+Chemistry - Industrial Chemistry Track                      |128/128| correct
+Civil Engineering                                           |128/128| correct
+Cognitive Science                                          @|144/124| parsing issues because of sub items 
+Communication, Media, and Design                           ~|132/124| double counts
+Computer and Systems Engineering                           ~|139/128| double counts CAD/Comm and has range of credit requirements so more than min
+Computer Science                                            |128/128| correct
+Design, Innovation, and Society                            ~|128/124| double counts Innovation Studio B/C
+Economics                                                  ~|128/124| double counts SCIS/Free elective
+Electrical Engineering                                      |136/128| correct (probably should add a warning that this over-maximizes credit to graduate)
+Electronic Arts                                            ~|132/124| double counts Calc 1/Calc for HASS
+Environmental Engineering                                  @|125/128| combines two classes together check parsing
+Environmental Science                                      *|111/125| Nightmare, they have a seperate thing for arch exempt like holy fuck thats annoying
+Games and Simulation Arts and Sciences                     ~|140/128| double counts + some issues with having multiple concentrations
+Geology                                                    ~|129/124| double counts 
+Hydrogeology                                               ~|126/124| double counts undergraduate research thesis/O-of-Classroom Experience
+Industrial and Management Engineering                       |128/128| correct
+Information Technology and Web Science                     *|110/128| Need to search around for the keyword "Course Track" and scan from there
+Materials Engineering                                       |126/130| bad parsing
+Mathematics                                                 |125/125| correct
+Mechanical Engineering Curriculum                          *|129/129| correct but need to check and verify
+Music                                                     ~*|137/131| double counts, Electives without credit amount edge case
+Nuclear Engineering Curriculum                              |130/130| correct 
+Philosophy                                                 *|172/126| double counts
+Physics                                                     |125/125| correct (catalog mistakenly shows 125 but it should be 128)
+Psychological Science                                      ~|140/124| double counts
+Science, Technology, and Society                           ~|132/124| double counts
+Sustainability Studies                                    ~*|132/124| double counts, parsing issues
