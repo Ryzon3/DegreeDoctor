@@ -2,7 +2,6 @@
 export function parseTranscript(data) {
   var el = document.createElement('html');
   el.innerHTML = data;
-  var majors = new Array(10);
   var a = el.getElementsByTagName('th');
   var b = el.getElementsByTagName('td'); 
   var i = 6;
@@ -15,5 +14,5 @@ export function parseTranscript(data) {
       break;
     }
   }
-
+  console.log(b[50]);
 };
