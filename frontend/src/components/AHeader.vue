@@ -1,10 +1,12 @@
 <script>
 import { useStore } from "../stores/store";
 import DarkModeToggle from "./DarkModeToggle.vue";
+import ProgressBar from "./ProgressBar.vue";
 
 export default {
     components: {
         DarkModeToggle,
+        ProgressBar,
     },
     data() {
         const plans = ["CS Plan", "ITWS Plan", "HASS Plan"];
@@ -57,12 +59,13 @@ export default {
                             <h6 class="q-ma-none">
                                 Current Plan: {{ selectedPlan }}
                             </h6>
-                            <q-select
+                            <div class="card-contain">
+                                <q-select
                                 v-model="selectedPlan"
                                 filled
                                 use-input
                                 input-debounce="0"
-                                label="Simple filter"
+                                label="Search"
                                 :options="filteredPlans"
                                 style="width: 200px"
                                 behavior="menu"
@@ -76,8 +79,11 @@ export default {
                                     </q-item>
                                 </template>
                             </q-select>
+                            <div>
+                                <ProgressBar />
+                            </div>
+                            </div>
                         </q-card-section>
-
                         <q-card-actions class="text-primary">
                             <q-btn v-close-popup flat label="Cancel"></q-btn>
                             <q-btn
@@ -93,8 +99,13 @@ export default {
         </q-toolbar>
     </q-header>
 </template>
-<!-- 
-Icon, left most
-light mode switch, right
-popup button, right of switch
--->
+
+<style scoped>
+.card-contain {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 1em;
+}
+</style>

@@ -49,10 +49,8 @@ a {
 }
 
 #text {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-family: 'Noto Serif', serif;
-    font-weight: bold;
-    font-style: italic;
 }
 
 </style>
